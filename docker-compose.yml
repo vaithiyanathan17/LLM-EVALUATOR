@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: defaultdb  # Initial database (another is created dynamically)
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh  # Init script to create llm_eval_db
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 5
+      timeout: 3s
+
+  backend:
+    build: ./backend
+    container_name: express_backend
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy  # Ensures PostgreSQL is ready before backend starts
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://postgres:mypassword@postgres_db:5432/llm_eval_db  # Corrected hostname
+    networks:
+      - app-network
+    volumes:
+      - uploads_data:/app/uploads
+
+  frontend:
+    build: ./frontend
+    container_name: react_frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+  uploads_data:
+
+networks:
+  app-network:

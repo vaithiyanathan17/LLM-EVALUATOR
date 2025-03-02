@@ -1,0 +1,126 @@
+.excel-container {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropzone {
+  border: 2px dashed #cccccc;
+  border-radius: 4px;
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.dropzone.active {
+  border-color: #2196f3;
+}
+
+.loading, .drop-message {
+  color: #666;
+  font-size: 16px;
+}
+
+.table-container {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+}
+
+.header-container {
+  position: sticky;
+  top: 0;
+  background: #f8f9fa;
+  z-index: 2;
+  overflow: hidden !important;
+}
+
+.header-row {
+  display: flex;
+}
+
+.header-cell {
+  padding: 8px;
+  font-weight: bold;
+  border-right: 1px solid #dee2e6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.header-label {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.resize-handle {
+  width: 5px;
+  height: 100%;
+  background-color: transparent;
+  cursor: col-resize;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.resize-handle:hover {
+  background-color: #999;
+}
+
+.list-container {
+  height: calc(100% - 40px);
+}
+
+.row {
+  display: flex;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.cell {
+  padding: 8px;
+  border-right: 1px solid #dee2e6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.header-row,
+.row,
+.header-cell,
+.cell {
+  box-sizing: border-box;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  margin-top: auto;
+}
+
+.submit {
+  background-color: #2e8ded;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.submit:hover {
+  background-color: #03f564;
+}
