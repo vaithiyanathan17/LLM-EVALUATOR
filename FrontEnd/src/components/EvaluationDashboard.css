@@ -1,0 +1,43 @@
+.previous-prompts .prompt-item {
+    cursor: pointer;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+  
+  .prompt-item.selected {
+    border-color: #646cff;
+    background-color: #f0f4ff;
+  }
+  
+  .prompt-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+  
+  .evaluation-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  
+  .metric-card {
+    padding: 1rem;
+    border-radius: 8px;
+    background: #f8f8f8;
+    text-align: center;
+  }
+  
+  .response-preview {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+  }

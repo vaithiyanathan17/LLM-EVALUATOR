@@ -114,6 +114,26 @@ services:
       - ./backend/.env
     networks:
       - app-network
+  
+  evaluation_worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.worker
+    restart: always
+    depends_on:
+      db_init:
+        condition: service_started
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://postgres:mypassword@postgres_db:5432/llm_eval_db
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    command: ["node", "src/workers/evaluationWorker.js"]
+    env_file:
+      - ./backend/.env
+    networks:
+      - app-network
 
   frontend:
     build: ./frontend

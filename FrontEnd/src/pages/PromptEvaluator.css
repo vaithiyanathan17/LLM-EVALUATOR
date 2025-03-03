@@ -84,3 +84,38 @@
     background: #218838;
   }
   
+
+  .accordion-item {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+  
+  .accordion-header {
+    background: #f5f5f5;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  
+  .accordion-header:hover {
+    background: #e0e0e0;
+  }
+  
+  .accordion-header.active {
+    background: #d9edf7;
+  }
+  
+  .accordion-content {
+    padding: 10px;
+    background: white;
+    border-top: 1px solid #ddd;
+  }
+  
+  .prompt-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  

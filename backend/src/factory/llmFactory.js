@@ -1,5 +1,6 @@
 const GroqService = require("./groqService");
 const GeminiService = require("./geminiService");
+const OpenAiService = require("./openAiService");
 
 class LLMFactory {
   static instances = {};
@@ -13,6 +14,9 @@ class LLMFactory {
         case "gemini":
           LLMFactory.instances[type] = new GeminiService();
           break;
+        case "openAi":
+            LLMFactory.instances[type] = new OpenAiService();
+            break;
         default:
           throw new Error("Invalid LLM type");
       }

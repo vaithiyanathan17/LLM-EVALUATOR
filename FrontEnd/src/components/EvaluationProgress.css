@@ -1,0 +1,28 @@
+.evaluation-progress {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin-top: 10px;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: #4caf50;
+    transition: width 0.3s ease-in-out;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+  

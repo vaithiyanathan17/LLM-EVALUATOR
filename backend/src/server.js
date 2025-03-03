@@ -4,6 +4,7 @@ const cors = require('cors');
 require("dotenv").config();
 const datasetRoutes = require('./routes/datasetRoutes');
 const promptRoutes = require('./routes/promptRoutes');
+const evaluationRoutes = require('./routes/evaluationRoutes');
 
 const app = express();
 app.use(cors());
@@ -14,6 +15,8 @@ app.use("/api/datasets/", datasetRoutes);
 console.log("Dataset routes loaded");
 app.use("/api/prompts/", promptRoutes);
 console.log("Prompt routes loaded");
+app.use("/api/evaluation/", evaluationRoutes);
+console.log("Evaluation routes loaded");
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

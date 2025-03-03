@@ -5,6 +5,7 @@ import { FixedSizeList as List } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const DropCsvViewer = () => {
   const [data, setData] = useState([]);
@@ -15,6 +16,7 @@ const DropCsvViewer = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [selectedFile, setSelectedFile] = useState(null);
   const [dataUploaded, setDataUploaded] = useState(false);
+  const navigate = useNavigate();
 
   const tableContainerRef = useRef(null);
   const headerContainerRef = useRef(null);
@@ -26,6 +28,10 @@ const DropCsvViewer = () => {
       );
     }
   }, [headers]);
+
+  const handleNextClick = () => {
+    navigate("/evaluate"); // Navigate to Evaluate page
+  };
 
   const processCSV = useCallback((file) => {
     setLoading(true);
@@ -225,7 +231,7 @@ const dataFlag = data.length > 0 ? true : false;
       )}
       {dataUploaded && (
         <div className="button-container">
-          <button className="next" type="submit" onClick={() => console.log("clicked next prompt page")}>
+          <button className="next" type="submit" onClick={handleNextClick}>
             Next
           </button>
         </div>  
