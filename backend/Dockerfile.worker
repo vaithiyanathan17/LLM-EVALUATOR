@@ -1,0 +1,22 @@
+# Use the same Node.js base image
+FROM node:18
+
+WORKDIR /app
+
+# Copy package.json and install dependencies
+COPY package.json package-lock.json ./
+RUN npm install --omit=dev
+
+# Copy only necessary files for workers
+COPY src/ src/
+COPY start-workers.sh .
+
+# Switch to a non-root user
+RUN useradd -m appuser && chown -R appuser /app
+USER appuser
+
+# Make the start-workers.sh script executable
+RUN chmod +x start-workers.sh
+
+# Start the worker processes
+CMD ["sh", "start-workers.sh"]

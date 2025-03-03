@@ -23,6 +23,6 @@ const upload = multer({ storage: storage });
 
 router.post('/upload-dataset', upload.single('file'), uploadDataset);
 router.post('/upload-rows', uploadRows);
-router.get('/datasets', getDatasets);
+router.get('/', getDatasets);
 
 module.exports = router;

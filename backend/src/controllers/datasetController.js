@@ -1,31 +1,6 @@
 const pool = require("../models/db");
 const path = require("path");
 
-const createTables = async () => {
-  try {
-    await pool.query(`
-      CREATE TABLE IF NOT EXISTS datasets (
-          id SERIAL PRIMARY KEY,
-          filename VARCHAR(255) NOT NULL,
-          filepath VARCHAR(255) NOT NULL,
-          columns JSONB NOT NULL,
-          uploaded_at TIMESTAMP DEFAULT NOW()
-      );
-    `);
-    await pool.query(`
-      CREATE TABLE IF NOT EXISTS dataset_rows (
-        id SERIAL PRIMARY KEY,
-        dataset_id INT REFERENCES datasets(id) ON DELETE CASCADE,
-        row_data JSONB NOT NULL
-      );
-    `);
-    console.log('Tables "datasets" and "dataset_rows" created or already exist.');
-  } catch (error) {
-    console.error("Error creating tables:", error);
-    throw new Error(`Error creating tables: ${error.message}`);
-  }
-};
-
 const uploadDataset = async (req, res) => {
   try {
     if (!req.file) {
@@ -34,7 +9,6 @@ const uploadDataset = async (req, res) => {
 
     const columns = req.body.columns ? JSON.parse(req.body.columns) : [];
     const filePath = path.join(__dirname, "../../uploads", req.file.filename);
-    await createTables();
     const result = await pool.query(
       `INSERT INTO datasets (filename, filepath, columns, uploaded_at) VALUES ($1, $2, $3, NOW()) RETURNING id`,
       [req.file.originalname, filePath, JSON.stringify(columns)]

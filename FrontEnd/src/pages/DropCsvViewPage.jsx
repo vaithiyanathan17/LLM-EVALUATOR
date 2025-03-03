@@ -6,7 +6,7 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const ExcelLikeCSVViewer = () => {
+const DropCsvViewer = () => {
   const [data, setData] = useState([]);
   const [headers, setHeaders] = useState([]);
   const [columnWidths, setColumnWidths] = useState({});
@@ -14,6 +14,7 @@ const ExcelLikeCSVViewer = () => {
   const [resizing, setResizing] = useState(null);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [dataUploaded, setDataUploaded] = useState(false);
 
   const tableContainerRef = useRef(null);
   const headerContainerRef = useRef(null);
@@ -51,6 +52,7 @@ const ExcelLikeCSVViewer = () => {
       if (acceptedFiles[0]){
         setSelectedFile(acceptedFiles[0]);
         processCSV(acceptedFiles[0]);
+        setDataUploaded(false);
       } 
     },
     [processCSV]
@@ -110,13 +112,13 @@ const ExcelLikeCSVViewer = () => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('columns', JSON.stringify(headers));
-        const response = await axios.post('http://localhost:3000/api/upload-dataset', formData, {
+        const response = await axios.post('http://localhost:3000/api/datasets/upload-dataset', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
         });
 
         console.log('File uploaded:', response.data);
 
-        await axios.post('http://localhost:3000/api/upload-rows', {
+        await axios.post('http://localhost:3000/api/datasets/upload-rows', {
             datasetId: response.data.datasetId,
             rows: data,
         }, {
@@ -124,11 +126,15 @@ const ExcelLikeCSVViewer = () => {
         });
 
         toast.success("Data saved successfully!");
+        setDataUploaded(true);
+
     } catch (error) {
         toast.error("Error saving data!");
         console.error('Upload error:', error);
     }
 };
+
+const dataFlag = data.length > 0 ? true : false;
 
 
 
@@ -210,15 +216,22 @@ const ExcelLikeCSVViewer = () => {
           </div>
         </div>
       )}
-      {data.length > 0 && (
+      {(!dataUploaded && dataFlag) > 0 && (
         <div className="button-container">
           <button className="submit" type="submit" onClick={() => clickSaveHandler(selectedFile)}>
             Save
           </button>
         </div>
       )}
+      {dataUploaded && (
+        <div className="button-container">
+          <button className="next" type="submit" onClick={() => console.log("clicked next prompt page")}>
+            Next
+          </button>
+        </div>  
+        )}
     </div>
   );
 };
 
-export default ExcelLikeCSVViewer;
+export default DropCsvViewer;
