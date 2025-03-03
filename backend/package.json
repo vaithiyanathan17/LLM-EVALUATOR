@@ -18,6 +18,9 @@
   },
   "scripts": {
     "start": "node src/server.js",
+    "docker:build": "docker-compose build",
+    "docker:run": "docker-compose up --scale prompt_worker=3 --scale template_worker=3",
+    "docker:down": "docker-compose down",
     "drop-db": "node src/models/dropDb.js"
   }
 }
