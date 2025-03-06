@@ -1,4 +1,4 @@
-# Chat Evaluation Application
+# LLM Evaluation Application
 
 ## Overview
 
