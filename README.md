@@ -6,9 +6,9 @@ The Chat Evaluation Application is designed to manage and evaluate chat interact
 
 ## Features
 
-- **Dataset Management**: Upload and manage datasets for chat evaluation.
+- **Dataset Management**: Upload and manage datasets for evaluation.
 - **Prompt Generation**: Generate prompts based on uploaded datasets.
-- **Response Evaluation**: Evaluate chat responses using multiple LLM API services.
+- **Response Evaluation**: Evaluate responses using multiple LLM API services.
 - **Progress Tracking**: Monitor the progress of ongoing evaluations.
 - **Historical Data**: View previous chats and their evaluations.
 
