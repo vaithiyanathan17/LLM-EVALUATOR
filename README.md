@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Chat Evaluation Application is designed to manage and evaluate chat interactions using various Large Language Model (LLM) API services. It allows users to upload datasets, generate prompts, and evaluate responses based on predefined criteria such as correctness and faithfulness. The application is built using a decoupling architecture with a frontend, backend. worker services.
+The LLM Evaluation Application is designed to manage and evaluate result of interactions using various Large Language Model (LLM) API service. It allows users to upload datasets, generate prompts, and evaluate responses based on predefined criteria such as correctness and faithfulness. The application is built using a decoupling architecture with a frontend, backend. worker services.
 
 ## Features
 
